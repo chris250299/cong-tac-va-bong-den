@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Công tắc và bóng đèn</title>
+    <meta charset="UTF-8">
+    <form>
+        <input type="button" id="switch" value="Switch Button">
+        <div id="div"></div>
+    </form>
+</head>
+<body>
+<script>
+    var SwitchButton = function () {
+
+        this.connectToLamp = function (electricLamp) {
+            this.electricLamp = electricLamp;
+        };
+        this.switchOn = function () {
+            this.status = true;
+        };
+        this.switchOff = function () {
+            this.status = false;
+        }
+    };
+
+    var ElectricLamp = function () {
+        this.light = function () {
+            return this.status;
+        };
+
+        this.turnOn = function () {
+            this.status = true;
+            document.getElementById("div").innerHTML += "Lamp is On" + "</br>";
+        };
+        this.turnOff = function () {
+            this.status = false;
+            document.getElementById("div").innerHTML += "Lamp is Off" + "</br>";
+        }
+    };
+
+    var realLamp = new ElectricLamp();
+    var realSwitch = new SwitchButton();
+    realSwitch.connectToLamp(realLamp);
+    document.getElementById("switch").addEventListener("click", function () {
+        if (this.status){
+            realSwitch.switchOn();
+            realLamp.turnOn();
+        this.status = false;
+    }
+    else {
+        realSwitch.switchOff();
+        realLamp.turnOff();
+        this.status = true;
+    }
+
+    })
+
+</script>
+</body>
+</html>
